@@ -48,7 +48,7 @@ def find_path(tiles, start, goal, player):
 
     while pr_queue:
         _, cost, path, current = heappop(pr_queue)
-        if dist(current, goal) <= 1:
+        if current == goal:
             return path
         if current in visited:
             continue
