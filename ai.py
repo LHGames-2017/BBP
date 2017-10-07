@@ -69,8 +69,13 @@ def bot():
 
     # return decision
     print("=== Map ===")
+    print " ",
     for i in range(20):
-        for j in range(20):
+        print ((i+player.Position.X) % 10),
+    print
+    for j in range(20):
+        print ((j+player.Position.Y) % 10),
+        for i in range(20):
             if deserialized_map[i][j].Content == TileContent.Empty:
                 print " ",
             elif deserialized_map[i][j].Content == TileContent.Wall:
