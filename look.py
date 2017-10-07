@@ -3,8 +3,8 @@ from ai import *
 
 def trouverPlusProche(position, map, type):
 
-    x = position.x
-    y = position.y
+    x = position.X
+    y = position.Y
 
     n = 1
     while n < 10:
