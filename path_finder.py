@@ -10,16 +10,16 @@ def free(tiles, p, player):
     p has absolute coordinates
     """
     # Change start and stop to relative coordinates
-    x = p.X - 10 + player.Position.X
-    y = p.Y - 10 + player.Position.Y
+    x = p.X - 10 + player.X
+    y = p.Y - 10 + player.Y
 
     if x < 0:
         return False
     if y < 0:
         return False
     # TODO: prevent overflows
-    if tiles[x][y].Content != 0:
-        return False
+    #if tiles[x][y].Content != 0:
+        #return False
     return True
 
 def find_path(tiles, start, goal, player):
@@ -33,16 +33,16 @@ def find_path(tiles, start, goal, player):
     pr_queue = []
     #heappush(pr_queue, (0 + heuristic(start, goal), 0, start, start))
     right = Point(start.X - 1, start.Y)
-    if free(tiles, right):
+    if free(tiles, right, player):
         heappush(pr_queue, (0 + heuristic(right, goal), 0, right, right))
     left = Point(start.X + 1, start.Y)
-    if free(tiles, left):
+    if free(tiles, left, player):
         heappush(pr_queue, (0 + heuristic(left, goal), 0, left, left))
     up = Point(start.X , start.Y - 1)
-    if free(tiles, up):
+    if free(tiles, up, player):
         heappush(pr_queue, (0 + heuristic(up, goal), 0, up, up))
     down = Point(start.X , start.Y + 1)
-    if free(tiles, down):
+    if free(tiles, down, player):
         heappush(pr_queue, (0 + heuristic(down, goal), 0, down, down))
     visited = {start}
 
@@ -54,16 +54,16 @@ def find_path(tiles, start, goal, player):
             continue
         visited.add(current)
         right = Point(current.X - 1, current.Y)
-        if free(tiles, right):
+        if free(tiles, right, player):
             heappush(pr_queue, (cost + heuristic(right, goal), cost + 1, path, right))
         left = Point(current.X + 1, current.Y)
-        if free(tiles, left):
+        if free(tiles, left, player):
             heappush(pr_queue, (cost + heuristic(left, goal), cost + 1, path, left))
         up = Point(current.X , current.Y - 1)
-        if free(tiles, up):
+        if free(tiles, up, player):
             heappush(pr_queue, (cost + heuristic(up, goal), cost + 1, path, up))
         down = Point(current.X , current.Y + 1)
-        if free(tiles, down):
+        if free(tiles, down, player):
             heappush(pr_queue, (cost + heuristic(down, goal), cost + 1, path, down))
     return None
 
