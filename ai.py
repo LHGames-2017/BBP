@@ -64,11 +64,14 @@ def bot():
 
         otherPlayers.append(player_info)
 
-    visualize_round.show(otherPlayers, serialized_map, deserialized_map)
+    #visualize_round.show(otherPlayers, serialized_map, deserialized_map)
 
 
     # return decision
-    return strategie.strat(player, deserialized_map)
+    print (player.Position)
+    a = strategie.strat(player, deserialized_map)
+    print(a)
+    return a
 
 @app.route("/", methods=["POST"])
 def reponse():
@@ -79,4 +82,4 @@ def reponse():
     return res_value
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=3000, debug=True)

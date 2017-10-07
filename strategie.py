@@ -11,12 +11,12 @@ def strat(player, map):
     posRes = trouverPlusProche(player.HouseLocation, map, 1)
 
 
-    if (DistanceEntre(player.HouseLocation, player.Position)+1) > DistanceEntre(trouverPlusProche(player.HouseLocation, map, 2), player.HouseLocation):
-        return path_finder.move_to(map, player.Position, player.HouseLocation, player.Position)
+    #if (DistanceEntre(player.HouseLocation, player.Position)+1) > DistanceEntre(trouverPlusProche(player.HouseLocation, map, 2), player.HouseLocation):
+     #   return path_finder.move_to(map, player.Position, player.HouseLocation, player.Position)
 
-    elif player.CarriedRessources >= player.CarryingCapacity:
-        if DistanceEntre(player.Position, player.HouseLocation) == 1:
-            return
+    if player.CarriedRessources >= player.CarryingCapacity:
+       # if DistanceEntre(player.Position, player.HouseLocation) == 1:
+            #return
         return path_finder.move_to(map, player.Position, player.HouseLocation, player.Position)
 
     elif abs(DistanceEntre(player.Position, posRes)) == 1:
@@ -25,7 +25,6 @@ def strat(player, map):
     else:
         return path_finder.move_to(map, player.Position, posRes, player.Position)
 
-    return
 
 
 def DistanceEntre(point1, point2):
