@@ -1,32 +1,35 @@
 
 from structs import *
+import ai
 
 
-def strat(player):
+def strat(player, map):
     print("--- Strat ---")
+
+    posRes = trouverPlusProche(player.HouseLocation, map, 1)
 
     if player.level < 3:
 
-        if distanceEnnemieToHouse():
-            moveTo(Player.HouseLocation)
+        if (DistanceEntre(player.HouseLocation, player.Position)+1) > DistanceEntre(trouverPlusProche(player.HouseLocation, map, 2), player.HouseLocation):
+            moveTo(Player.HouseLocation, map)
 
         elif player.CarriedRessources >= player.CarryingCapacity:
-            moveTo(player.HouseLocation)
+            moveTo(map, player.Position, player.HouseLocation)
 
-        elif distanceEntre(player.Position, trouverPlusProche(minerais)) == 1:
-            miner()
-        else
-            moveTo(trouverPlusProche(minerais))
+        elif abs(DistanceEntre(player.Position, posRes)) == 1:
+             ai.create_collect_action(posRes)
 
-    else
-
+        else:
+            moveTo(map, player.Position, posRes)
 
 
 
-def distanceEntre(point1, point2):
+    return
+
+
+def DistanceEntre(point1, point2):
     deltaX = abs(point1.x - point2.x)
     deltaY = abs(point1.y - point2.y)
     total = deltaX+deltaY
     return total
-
 
