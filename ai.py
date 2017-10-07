@@ -5,7 +5,7 @@ import numpy
 
 from actions import *
 import visualize_round
-from path_finder import move_to
+import strategie
 
 app = Flask(__name__)
 
@@ -68,7 +68,7 @@ def bot():
 
 
     # return decision
-    return create_move_action(Point(x-1,y))
+    return strategie.strat(player, serialized_map)
 
 @app.route("/", methods=["POST"])
 def reponse():

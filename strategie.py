@@ -16,13 +16,13 @@ def strat(player, map):
             return path_finder.move_to(map, player.Position, player.HouseLocation)
 
         elif player.CarriedRessources >= player.CarryingCapacity:
-            return move_to(map, player.Position, player.HouseLocation)
+            return path_finder.move_to(map, player.Position, player.HouseLocation)
 
         elif abs(DistanceEntre(player.Position, posRes)) == 1:
             return ai.create_collect_action(posRes)
 
         else:
-            return move_to(map, player.Position, posRes)
+            return path_finder.move_to(map, player.Position, posRes)
 
 
 
