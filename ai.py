@@ -3,10 +3,13 @@ from structs import *
 import json
 import numpy
 
+import visualize_round
+
 app = Flask(__name__)
 
 def create_action(action_type, target):
     actionContent = ActionContent(action_type, target.__dict__)
+    print(action_type, target)
     return json.dumps(actionContent.__dict__)
 
 def create_move_action(target):
@@ -83,6 +86,9 @@ def bot():
 
             otherPlayers.append({player_name: player_info })
 
+    visualize_round.show(otherPlayers)
+
+
     # return decision
     return create_move_action(Point(0,1))
 
@@ -94,4 +100,4 @@ def reponse():
     return bot()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
+    app.run(host="0.0.0.0", port=8080)
