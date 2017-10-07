@@ -10,7 +10,8 @@ app = Flask(__name__)
 
 def create_action(action_type, target):
     actionContent = ActionContent(action_type, target.__dict__)
-    print(action_type, target)
+    if(hasattr(target, 'X') and hasattr(target, 'Y')):
+        print(action_type, [target.X, target.Y])
     return json.dumps(actionContent.__dict__)
 
 def create_move_action(target):
@@ -89,15 +90,17 @@ def bot():
 
     visualize_round.show(otherPlayers, serialized_map, deserialized_map)
 
+
     # return decision
-    return create_move_action(Point(0,1))
+    return create_move_action(Point(x-1,y))
 
 @app.route("/", methods=["POST"])
 def reponse():
     """
     Point d'entree appelle par le GameServer
     """
-    return bot()
+    res_value = bot()
+    return res_value
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
