@@ -2,6 +2,7 @@
 from structs import *
 from look import *
 import ai
+import path_finder
 
 
 def strat(player, map):
@@ -12,16 +13,16 @@ def strat(player, map):
     if player.level < 3:
 
         if (DistanceEntre(player.HouseLocation, player.Position)+1) > DistanceEntre(trouverPlusProche(player.HouseLocation, map, 2), player.HouseLocation):
-            moveTo(Player.HouseLocation, map)
+            return path_finder.move_to(map, player.Position, player.HouseLocation)
 
         elif player.CarriedRessources >= player.CarryingCapacity:
-            moveTo(map, player.Position, player.HouseLocation)
+            return move_to(map, player.Position, player.HouseLocation)
 
         elif abs(DistanceEntre(player.Position, posRes)) == 1:
-             ai.create_collect_action(posRes)
+            return ai.create_collect_action(posRes)
 
         else:
-            moveTo(map, player.Position, posRes)
+            return move_to(map, player.Position, posRes)
 
 
 
