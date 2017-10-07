@@ -87,8 +87,7 @@ def bot():
 
             otherPlayers.append({player_name: player_info })
 
-    visualize_round.show(otherPlayers)
-
+    visualize_round.show(otherPlayers, serialized_map, deserialized_map)
 
     # return decision
     return create_move_action(Point(0,1))
