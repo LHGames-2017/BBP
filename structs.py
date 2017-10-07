@@ -32,6 +32,20 @@ class Point(object):
     def __str__(self):
         return "{{{0}, {1}}}".format(self.X, self.Y)
 
+    def __repr__(self):
+        return self.__str__()
+
+    def __eq__(self, other):
+        if not isinstance(other, Point):
+            return False
+        return self.X == other.X and self.Y == other.Y
+
+    def __hash__(self):
+        return hash((self.X,self.Y))
+
+    def __lt__(self, other):
+        return hash(self) < hash(other)
+
     # Distance between two Points
     def Distance(self, p1, p2):
         delta_x = p1.X - p2.X
