@@ -14,8 +14,11 @@ def show(player_dict, serialized_map, deserialized_map):
                 if(item.Content ==2):
                     lst_round.append([item.X, item.Y, item.Content])
 
+    #if(len(item)==0):
+    #    print("No Player found around")
     for item in lst_round:
         print item
+
 
     #print("--- Other Player ---")
 
