@@ -6,9 +6,11 @@ import path_finder
 
 
 def strat(player, map):
-    print("--- Strat ---")
+    print("----- Strat -----")
 
-    posRes = trouverPlusProche(player.HouseLocation, map, 1)
+    posRes = trouverPlusProche(player.HouseLocation, map, 4)
+    print("-----ResPos-----")
+    print (posRes)
 
 
     #if (DistanceEntre(player.HouseLocation, player.Position)+1) > DistanceEntre(trouverPlusProche(player.HouseLocation, map, 2), player.HouseLocation):
@@ -31,5 +33,7 @@ def DistanceEntre(point1, point2):
     deltaX = abs(point1.X - point2.X)
     deltaY = abs(point1.Y - point2.Y)
     total = deltaX+deltaY
+    print("---ToTal---")
+    print(total)
     return total
 
