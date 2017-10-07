@@ -12,7 +12,7 @@ def free(tiles, p):
         return False
     # TODO: prevent overflows
     if tiles[p.X][p.Y].Content != 0:
-        return True
+        return False
     return True
 
 def find_path(tiles, start, goal):
