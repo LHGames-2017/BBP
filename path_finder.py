@@ -5,19 +5,27 @@ from actions import create_move_action
 def dist(p1, p2):
     return abs(p1.X - p2.X) +  abs(p1.Y - p2.Y)
 
-def free(tiles, p):
-    if p.X < 0:
+def free(tiles, p, player):
+    """
+    p has absolute coordinates
+    """
+    # Change start and stop to relative coordinates
+    x = p.X - 10 + player.Position.X
+    y = p.Y - 10 + player.Position.Y
+
+    if x < 0:
         return False
-    if p.Y < 0:
+    if y < 0:
         return False
     # TODO: prevent overflows
-    if tiles[p.X][p.Y].Content != 0:
+    if tiles[x][y].Content != 0:
         return False
     return True
 
-def find_path(tiles, start, goal):
+def find_path(tiles, start, goal, player):
     """
     Search for the minimal path from start to an adjacent cell of goal
+    start and stop are absolute coordinates in the full map.
     """
     def heuristic(cell, goal):
         return dist(cell, goal) - 1
@@ -59,8 +67,8 @@ def find_path(tiles, start, goal):
             heappush(pr_queue, (cost + heuristic(down, goal), cost + 1, path, down))
     return None
 
-def move_to(tiles, start, stop):
-    p = find_path(tiles, start, stop)
+def move_to(tiles, start, goal, player):
+    p = find_path(tiles, start, goal, player)
     if p != None:
         return create_move_action(p)
     return None
