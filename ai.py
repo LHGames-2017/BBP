@@ -68,7 +68,7 @@ def bot():
 
 
     # return decision
-    return strategie.strat(player, serialized_map)
+    return strategie.strat(player, deserialized_map)
 
 @app.route("/", methods=["POST"])
 def reponse():
