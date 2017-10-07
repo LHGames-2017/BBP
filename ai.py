@@ -78,9 +78,9 @@ def bot():
             elif deserialized_map[i][j].Content == TileContent.House:
                 print "^",
             elif deserialized_map[i][j].Content == TileContent.Lava:
-                print "~",
+                print "o",
             elif deserialized_map[i][j].Content == TileContent.Resource:
-                print "-",
+                print "~",
             elif deserialized_map[i][j].Content == TileContent.Shop:
                 print "$",
             elif deserialized_map[i][j].Content == TileContent.Player:
