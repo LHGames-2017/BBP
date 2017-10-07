@@ -70,7 +70,7 @@ def bot():
     # return decision
     print (player.Position)
     a = strategie.strat(player, deserialized_map)
-    print(a)
+    print(player.CarriedRessources)
     return a
 
 @app.route("/", methods=["POST"])
@@ -82,4 +82,4 @@ def reponse():
     return res_value
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
