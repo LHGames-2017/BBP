@@ -68,9 +68,12 @@ def bot():
 
 
     # return decision
-    print (player.Position)
+    print("=== Player ===")
+    print("Score: "+str(player.Score))
+    print("Position: " + str(player.Position))
+    print("Health: " + str(player.Health) + "/" + str(player.MaxHealth))
+    print("Ressources: " + str(player.CarriedRessources) + "/" + str(player.CarryingCapacity))
     a = strategie.strat(player, deserialized_map)
-    print(player.CarriedRessources)
     return a
 
 @app.route("/", methods=["POST"])
