@@ -8,7 +8,7 @@ import path_finder
 def strat(player, map):
     print("----- Strat -----")
 
-    posRes = trouverPlusProche(player.HouseLocation, map, 4)
+    posRes = trouverPlusProche(player.Position, map, TileContent.Resource)
     print("-----ResPos-----")
     print (posRes)
 
