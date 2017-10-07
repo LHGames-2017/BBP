@@ -3,15 +3,15 @@ from ai import *
 
 def trouverPlusProche(position, map, type):
 
-    x = position.x
-    y = position.y
+    x = position.X
+    y = position.Y
 
     n = 1
     while n < 10:
-        for i in range(x - n, x + n + 1):
-            for j in range(y - n, y + n + 1):
-                if map[i][j].Content == type:
-                    positionPlusProche = Point(x, y)
+        for i in range(-n, n + 1):
+            for j in range(-n, n + 1):
+                if map[i+10][j+10].Content == type:
+                    positionPlusProche = Point(x+i, j+y)
                     return (positionPlusProche)
         n += 1
 
