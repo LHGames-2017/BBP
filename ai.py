@@ -4,12 +4,14 @@ import json
 import numpy
 
 import visualize_round
+#import strategie
 
 app = Flask(__name__)
 
 def create_action(action_type, target):
     actionContent = ActionContent(action_type, target.__dict__)
-    print(action_type, target)
+    if(hasattr(target, 'X') and hasattr(target, 'Y')):
+        print(action_type, [target.X, target.Y])
     return json.dumps(actionContent.__dict__)
 
 def create_move_action(target):
@@ -37,7 +39,7 @@ def deserialize_map(serialized_map):
     serialized_map = serialized_map[1:]
     rows = serialized_map.split('[')
     column = rows[0].split('{')
-    deserialized_map = [[Tile() for x in range(40)] for y in range(40)]
+    deserialized_map = [[Tile() for x in range(20)] for y in range(20)]
     for i in range(len(rows) - 1):
         column = rows[i + 1].split('{')
 
@@ -67,7 +69,7 @@ def bot():
     y = pos["Y"]
     house = p["HouseLocation"]
     player = Player(p["Health"], p["MaxHealth"], Point(x,y),
-                    Point(house["X"], house["Y"]),
+                    Point(house["X"], house["Y"]), p["Score"],
                     p["CarriedResources"], p["CarryingCapacity"])
 
     # Map
@@ -76,28 +78,28 @@ def bot():
 
     otherPlayers = []
 
-    for player_dict in map_json["OtherPlayers"]:
-        for player_name in player_dict.keys():
-            player_info = player_dict[player_name]
-            p_pos = player_info["Position"]
-            player_info = PlayerInfo(player_info["Health"],
+    for players in map_json["OtherPlayers"]:
+        player_info = players["Value"]
+        p_pos = player_info["Position"]
+        player_info = PlayerInfo(player_info["Health"],
                                      player_info["MaxHealth"],
                                      Point(p_pos["X"], p_pos["Y"]))
 
-            otherPlayers.append({player_name: player_info })
+        otherPlayers.append(player_info)
 
-    visualize_round.show(otherPlayers)
+    visualize_round.show(otherPlayers, serialized_map, deserialized_map)
 
 
     # return decision
-    return create_move_action(Point(0,1))
+    return create_move_action(Point(x-1,y))
 
 @app.route("/", methods=["POST"])
 def reponse():
     """
     Point d'entree appelle par le GameServer
     """
-    return bot()
+    res_value = bot()
+    return res_value
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
