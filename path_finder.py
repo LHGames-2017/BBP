@@ -18,8 +18,8 @@ def free(tiles, p, player):
     if y < 0:
         return False
     # TODO: prevent overflows
-    #if tiles[x][y].Content != 0:
-        #return False
+    if tiles[x][y].Content != 0:
+        return False
     return True
 
 def find_path(tiles, start, goal, player):

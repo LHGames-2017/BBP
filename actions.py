@@ -21,6 +21,9 @@ def create_steal_action(target):
 def create_heal_action():
     return create_action("HealAction", "")
 
+def create_upgrade_action(item):
+    return create_action("UpgradeAction", item)
+
 def create_purchase_action(item):
     return create_action("PurchaseAction", item)
 
