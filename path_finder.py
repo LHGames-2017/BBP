@@ -17,8 +17,12 @@ def free(tiles, p, player):
         return False
     if y < 0:
         return False
+    if x >= 19:
+        return False
+    if y >= 19:
+        return False
     # TODO: prevent overflows
-    if tiles[x][y].Content != 0:
+    if tiles[x][y].Content != TileContent.Empty:
         return False
     return True
 
